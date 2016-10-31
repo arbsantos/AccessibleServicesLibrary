@@ -69,9 +69,9 @@ public interface Library {
     public void logNodeTree(AccessibilityNodeInfo node);
 
     /**
-     * Given a AccessibilityNodeInfo returns a list of all visible AccessibilityNodeInfo
+     * Given a AccessibilityNodeInfo returns a list of all descriptions of visible AccessibilityNodeInfo
      * @param node
-     * @return List of all visible AccessibilityNodeInfo
+     * @return List of all descriptions of visible AccessibilityNodeInfo
      */
     public List<String> getVisibleNodes(AccessibilityNodeInfo node);
 
