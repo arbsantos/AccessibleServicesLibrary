@@ -3,6 +3,8 @@ package pt.ul.fc.di.lasige.accessibleserviceslibrary;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
+import java.util.List;
+
 
 public interface Library {
 
@@ -65,6 +67,13 @@ public interface Library {
      * @param node
      */
     public void logNodeTree(AccessibilityNodeInfo node);
+
+    /**
+     * Given a AccessibilityNodeInfo returns a list of all visible AccessibilityNodeInfo
+     * @param node
+     * @return List of all visible AccessibilityNodeInfo
+     */
+    public List<String> getVisibleNodes(AccessibilityNodeInfo node);
 
 
 }
