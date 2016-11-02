@@ -30,7 +30,7 @@ public interface ILibrary {
      * @param node
      * @return String with the descr
      */
-    public String getChildDescription(AccessibilityNodeInfo node);
+    public String getChildDescription(AccessibilityNodeInfo node, int index);
 
     /**
      * Given a AccessibilityNodeInfo returns its package
@@ -60,13 +60,20 @@ public interface ILibrary {
      * @param description
      * @return
      */
-    public AccessibilityNodeInfo searchNode(String description);
+    public List<AccessibilityNodeInfo> searchNode(String description);
 
+    /**
+     *
+     * @param node
+     */
+    public void listTree(AccessibilityNodeInfo node);
+
+    public void populate_lists();
     /**
      * Log on loogcat all nodes on the screen
      * @param node
      */
-    public void logNodeTree(AccessibilityNodeInfo node);
+    public void logNodeTree(AccessibilityNodeInfo node, int indent);
 
     /**
      * Given a AccessibilityNodeInfo returns a list of all descriptions of visible AccessibilityNodeInfo
@@ -75,5 +82,5 @@ public interface ILibrary {
      */
     public List<String> getVisibleNodes(AccessibilityNodeInfo node);
 
-
+    public void cleanLists();
 }
