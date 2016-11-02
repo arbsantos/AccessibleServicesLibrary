@@ -246,7 +246,7 @@ public class Library implements ILibrary {
     }
 
     @Override
-    public List<AccessibilityNodeInfo> getVisibleNodes(AccessibilityNodeInfo node) {
+    public List<AccessibilityNodeInfo> getVisibleNodes() {
         return visibleNodes;
     }
 

@@ -77,10 +77,9 @@ public interface ILibrary {
 
     /**
      * Given a AccessibilityNodeInfo returns a list of all visible AccessibilityNodeInfo
-     * @param node
      * @return List of all  visible AccessibilityNodeInfo
      */
-    public List<AccessibilityNodeInfo> getVisibleNodes(AccessibilityNodeInfo node);
+    public List<AccessibilityNodeInfo> getVisibleNodes();
 
     public void cleanLists();
 }
