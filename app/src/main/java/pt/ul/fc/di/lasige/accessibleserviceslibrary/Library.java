@@ -15,12 +15,14 @@ public class Library implements ILibrary {
     private AccessibilityService service;
     private Map<String, AccessibilityNodeInfo> scrollableNodes;
     private List<String> clickableNodes;
+    private List<AccessibilityNodeInfo> visibleNodes;
     //private int clickablesSize;
 
     public Library(AccessibilityService service){
         this.service=service;
         scrollableNodes = new HashMap<>();
         clickableNodes = new ArrayList<>();
+        visibleNodes = new ArrayList<>();
     }
 
     @Override
@@ -164,6 +166,11 @@ public class Library implements ILibrary {
                 }
             }
         }
+
+        if(node.isVisibleToUser())
+            visibleNodes.add(node);
+
+
         for (int i = 0; i < node.getChildCount(); i++) {
             listTree(node.getChild(i));
         }
@@ -239,8 +246,8 @@ public class Library implements ILibrary {
     }
 
     @Override
-    public List<String> getVisibleNodes(AccessibilityNodeInfo node) {
-        return null;
+    public List<AccessibilityNodeInfo> getVisibleNodes(AccessibilityNodeInfo node) {
+        return visibleNodes;
     }
 
     @Override

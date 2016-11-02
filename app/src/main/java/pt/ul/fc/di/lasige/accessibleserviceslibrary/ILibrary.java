@@ -76,11 +76,11 @@ public interface ILibrary {
     public void logNodeTree(AccessibilityNodeInfo node, int indent);
 
     /**
-     * Given a AccessibilityNodeInfo returns a list of all descriptions of visible AccessibilityNodeInfo
+     * Given a AccessibilityNodeInfo returns a list of all visible AccessibilityNodeInfo
      * @param node
-     * @return List of all descriptions of visible AccessibilityNodeInfo
+     * @return List of all  visible AccessibilityNodeInfo
      */
-    public List<String> getVisibleNodes(AccessibilityNodeInfo node);
+    public List<AccessibilityNodeInfo> getVisibleNodes(AccessibilityNodeInfo node);
 
     public void cleanLists();
 }
