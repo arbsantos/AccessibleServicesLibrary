@@ -82,4 +82,18 @@ public interface ILibrary {
     public List<AccessibilityNodeInfo> getVisibleNodes();
 
     public void cleanLists();
+
+    public boolean click(AccessibilityNodeInfo node);
+
+    public boolean scrollForward(AccessibilityNodeInfo node);
+
+    public boolean scrollBackward(AccessibilityNodeInfo node);
+
+    public String getClickable(int index);
+
+    public int clickablesSize();
+
+    public AccessibilityNodeInfo getScrollable(String s);
+
+    public List<String> getClickableNodes();
 }

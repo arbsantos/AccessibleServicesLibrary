@@ -255,5 +255,41 @@ public class Library implements ILibrary {
         clickableNodes.clear();
     }
 
+    @Override
+    public boolean click(AccessibilityNodeInfo node) {
+        if(!node.performAction(AccessibilityNodeInfo.ACTION_CLICK))
+            return node.getParent().performAction(AccessibilityNodeInfo.ACTION_CLICK);
+        else
+            return true;
+    }
 
+    @Override
+    public boolean scrollForward(AccessibilityNodeInfo node) {
+        return node.performAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD);
+    }
+
+    @Override
+    public boolean scrollBackward(AccessibilityNodeInfo node) {
+        return node.performAction(AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD);
+    }
+
+    @Override
+    public String getClickable(int index){
+        return clickableNodes.get(index);
+    }
+
+    @Override
+    public int clickablesSize(){
+        return clickableNodes.size();
+    }
+
+    @Override
+    public AccessibilityNodeInfo getScrollable(String s){
+        return scrollableNodes.get(s);
+    }
+
+    @Override
+    public List<String> getClickableNodes(){
+        return clickableNodes;
+    }
 }
