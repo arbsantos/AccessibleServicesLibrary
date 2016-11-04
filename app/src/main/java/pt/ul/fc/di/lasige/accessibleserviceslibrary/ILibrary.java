@@ -57,8 +57,8 @@ public interface ILibrary {
 
     /**
      * Search for a node on screen
-     * @param description
-     * @return
+     * @param description description to search
+     * @return Returns a list of all nodes wich description contains the param given
      */
     public List<AccessibilityNodeInfo> searchNode(String description);
 
