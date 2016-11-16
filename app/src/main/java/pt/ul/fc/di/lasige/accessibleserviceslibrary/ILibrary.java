@@ -128,12 +128,12 @@ public interface ILibrary {
     public List<AccessibilityNodeInfo> getAllScrollable();
 
     /**
-     * Compare the nodes n1 and n2
+     * Compare the nodes n1 and n2 and gives a value of similarity between 0 and 1
      * @param n1
      * @param n2
-     * @return true if they are similar false if not
+     * @return 0 - totally different 1 - equals
      */
-    public boolean compareNodes(AccessibilityNodeInfo n1, AccessibilityNodeInfo n2);
+    public double compareNodes(AccessibilityNodeInfo n1, AccessibilityNodeInfo n2);
 
 
 }

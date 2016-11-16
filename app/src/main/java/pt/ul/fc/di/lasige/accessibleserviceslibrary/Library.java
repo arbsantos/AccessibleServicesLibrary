@@ -6,6 +6,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -285,11 +286,32 @@ public class Library implements ILibrary {
 
     @Override
     public List<AccessibilityNodeInfo> getAllScrollable() {
-        return null;
+        return (List <AccessibilityNodeInfo>) scrollableNodes.values();
     }
 
     @Override
-    public boolean compareNodes(AccessibilityNodeInfo n1, AccessibilityNodeInfo n2) {
-        return false;
+    public double compareNodes(AccessibilityNodeInfo n1, AccessibilityNodeInfo n2) {
+
+        double similarity = 0.0;
+        double total = 10.0;
+
+        if(n1.getText().equals(n2.getText()))
+            similarity+=2;
+        if(n1.getContentDescription().equals(n2.getContentDescription()))
+            similarity+=2;
+        if(n1.getPackageName().equals(n2.getPackageName()))
+            similarity+=1;
+        if(n1.getChildCount()==n2.getChildCount())
+            similarity+=1;
+        if(n1.getClassName().equals(n2.getClassName()))
+            similarity+=1;
+        if(n1.isScrollable() && n2.isScrollable())
+            similarity+=1;
+        if(n1.isClickable() && n2.isClickable())
+            similarity+=1;
+        if(n1.isFocusable() && n2.isFocusable())
+            similarity+=1;
+
+        return similarity/total;
     }
 }
