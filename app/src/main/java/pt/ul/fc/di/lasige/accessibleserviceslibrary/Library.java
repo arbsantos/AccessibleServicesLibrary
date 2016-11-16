@@ -57,20 +57,10 @@ public class Library implements ILibrary {
     @Override
     public String getChildDescription(AccessibilityNodeInfo node, int index) {
 
-        if(node!=null && node.getChildCount()>0)
+        if(node!=null && node.getChildCount()>0 && index < node.getChildCount())
            return getDescription(node.getChild(index));
 
         return null;
-    }
-
-    @Override
-    public String getPackageName(AccessibilityNodeInfo node) {
-        return String.format("%s", node.getPackageName());
-    }
-
-    @Override
-    public String getClassName(AccessibilityNodeInfo node) {
-        return String.format("%s", node.getPackageName());
     }
 
     @Override
@@ -129,7 +119,7 @@ public class Library implements ILibrary {
     @Override
     public List<AccessibilityNodeInfo> searchNode(String description) {
 
-        populate_lists();
+        populateLists();
 
         while(service.getRootInActiveWindow().findAccessibilityNodeInfosByText(description).size()==0){
             if(scrollableNodes.get(service.getRootInActiveWindow().getPackageName().toString())==null)
@@ -177,7 +167,7 @@ public class Library implements ILibrary {
     }
 
     @Override
-    public void populate_lists(){
+    public void populateLists(){
 
         //clean variables
         cleanLists();
@@ -291,5 +281,15 @@ public class Library implements ILibrary {
     @Override
     public List<String> getClickableNodes(){
         return clickableNodes;
+    }
+
+    @Override
+    public List<AccessibilityNodeInfo> getAllScrollable() {
+        return null;
+    }
+
+    @Override
+    public boolean compareNodes(AccessibilityNodeInfo n1, AccessibilityNodeInfo n2) {
+        return false;
     }
 }
