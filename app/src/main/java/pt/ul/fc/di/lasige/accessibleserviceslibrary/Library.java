@@ -177,7 +177,7 @@ public class Library implements ILibrary {
         //collect all the nodes on screen
         int timesScrolled = 0;
         int clickablesSize = clickableNodes.size();
-        ArrayList<AccessibilityNodeInfo> aux=(ArrayList<AccessibilityNodeInfo>) scrollableNodes.values();
+        ArrayList<AccessibilityNodeInfo> aux= getAllScrollable();
         listTree(service.getRootInActiveWindow());
 
 
@@ -286,8 +286,8 @@ public class Library implements ILibrary {
     }
 
     @Override
-    public List<AccessibilityNodeInfo> getAllScrollable() {
-        return (List <AccessibilityNodeInfo>) scrollableNodes.values();
+    public ArrayList<AccessibilityNodeInfo> getAllScrollable() {
+        return new ArrayList<>(scrollableNodes.values());
     }
 
     @Override
