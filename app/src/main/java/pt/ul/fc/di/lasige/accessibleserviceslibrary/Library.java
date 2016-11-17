@@ -177,13 +177,14 @@ public class Library implements ILibrary {
         //collect all the nodes on screen
         int timesScrolled = 0;
         int clickablesSize = clickableNodes.size();
+        ArrayList<AccessibilityNodeInfo> aux=(ArrayList<AccessibilityNodeInfo>) scrollableNodes.values();
         listTree(service.getRootInActiveWindow());
 
 
         //reset page to the top Scroll (up/back)
-        if(scrollableNodes.size()>0) {
+        if(aux.size()>0) {
             while (clickablesSize != clickableNodes.size()) {
-                scrollableNodes.get(0).performAction(AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD);
+                aux.get(0).performAction(AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD);
                 timesScrolled++;
                 clickablesSize = clickableNodes.size();
                 listTree(service.getRootInActiveWindow());
@@ -199,9 +200,9 @@ public class Library implements ILibrary {
 
 
         //after reset start scroll down
-        if(scrollableNodes.size()>0) {
+        if(aux.size()>0) {
             while (clickablesSize!=clickableNodes.size()) {
-                scrollableNodes.get(scrollableNodes.size() - 1).performAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD);
+                aux.get(aux.size() - 1).performAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD);
                 clickablesSize = clickableNodes.size();
                 listTree(service.getRootInActiveWindow());
             }
