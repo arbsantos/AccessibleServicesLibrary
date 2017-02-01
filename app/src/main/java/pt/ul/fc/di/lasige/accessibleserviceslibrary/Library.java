@@ -122,13 +122,21 @@ public class Library implements ILibrary {
 
         populateLists();
 
-        while(service.getRootInActiveWindow().findAccessibilityNodeInfosByText(description).size()==0){
-            if(scrollableNodes.get(service.getRootInActiveWindow().getPackageName().toString())==null)
-                break;
-            scrollableNodes.get(service.getRootInActiveWindow().getPackageName().toString()).performAction(AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD);
+        AccessibilityNodeInfo root = service.getRootInActiveWindow();
+
+        while(root==null){
+            root = service.getRootInActiveWindow();
         }
 
-        return service.getRootInActiveWindow().findAccessibilityNodeInfosByText(description);
+        while(root.findAccessibilityNodeInfosByText(description).size()==0){
+            if(scrollableNodes.get(root.getPackageName().toString())==null)
+                break;
+            if(!scrollableNodes.get(root.getPackageName().toString()).performAction(AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD)){
+                return searchNode(description);//something went wrong try again
+            }
+        }
+
+        return root.findAccessibilityNodeInfosByText(description);
 
     }
 
@@ -170,6 +178,12 @@ public class Library implements ILibrary {
     @Override
     public void populateLists(){
 
+        AccessibilityNodeInfo root = service.getRootInActiveWindow();
+
+        while(root==null){
+            root = service.getRootInActiveWindow();
+        }
+
         //clean variables
         cleanLists();
         //this.index=-1;
@@ -178,7 +192,7 @@ public class Library implements ILibrary {
         int timesScrolled = 0;
         int clickablesSize = clickableNodes.size();
         ArrayList<AccessibilityNodeInfo> aux= getAllScrollable();
-        listTree(service.getRootInActiveWindow());
+        listTree(root);
 
 
         //reset page to the top Scroll (up/back)
@@ -187,7 +201,7 @@ public class Library implements ILibrary {
                 aux.get(0).performAction(AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD);
                 timesScrolled++;
                 clickablesSize = clickableNodes.size();
-                listTree(service.getRootInActiveWindow());
+                listTree(root);
             }
         }
 
@@ -196,7 +210,7 @@ public class Library implements ILibrary {
         //this.index=-1;
 
         clickablesSize = clickableNodes.size();
-        listTree(service.getRootInActiveWindow());
+        listTree(root);
 
 
         //after reset start scroll down
@@ -204,7 +218,7 @@ public class Library implements ILibrary {
             while (clickablesSize!=clickableNodes.size()) {
                 aux.get(aux.size() - 1).performAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD);
                 clickablesSize = clickableNodes.size();
-                listTree(service.getRootInActiveWindow());
+                listTree(root);
             }
         }
     }
