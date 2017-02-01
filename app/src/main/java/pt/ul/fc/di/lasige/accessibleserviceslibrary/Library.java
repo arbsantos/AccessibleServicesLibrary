@@ -131,9 +131,8 @@ public class Library implements ILibrary {
         while(root.findAccessibilityNodeInfosByText(description).size()==0){
             if(scrollableNodes.get(root.getPackageName().toString())==null)
                 break;
-            if(!scrollableNodes.get(root.getPackageName().toString()).performAction(AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD)){
-                return searchNode(description);//something went wrong try again
-            }
+            scrollableNodes.get(root.getPackageName().toString()).performAction(AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD);
+
         }
 
         return root.findAccessibilityNodeInfosByText(description);
